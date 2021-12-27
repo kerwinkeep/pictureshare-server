@@ -38,4 +38,14 @@ public class PictureController {
         }
         return "Failed to give a like.";
     }
+
+    @RequestMapping("/getPersonPictures")
+    @ResponseBody
+    public List<Picture> getPersonPictures(@RequestBody JSONObject jsonObject){
+
+        String userId=jsonObject.get("id").toString();
+        List<Picture> pictureList;
+        pictureList = pictureDao.queryPersonalPicturesOrOrderByCreateTime(Long.parseLong(userId));
+        return  pictureList;
+    }
 }
