@@ -2,10 +2,13 @@ package com.kerwinkeep.pictureshareserver.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.kerwinkeep.pictureshareserver.daoi.PictureDao;
+import com.kerwinkeep.pictureshareserver.daoi.UserDao;
 import com.kerwinkeep.pictureshareserver.model.Picture;
+import com.kerwinkeep.pictureshareserver.vo.PictureVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -15,13 +18,29 @@ public class PictureController {
     @Autowired
     private PictureDao pictureDao;
 
+    @Autowired
+    private UserDao userDao;
+
     @RequestMapping("/getPictures")
     @ResponseBody
-    public List<Picture> getPictures(){
+    public List<PictureVO> getPictures(){
 
-        List<Picture> pictureList;
-        pictureList = pictureDao.queryPicturesOrOrderByCreateTime();
-        return pictureList;
+        List<PictureVO> pictureVOList = new ArrayList<>();
+        List<Picture> pictureList = pictureDao.queryPicturesOrderByCreateTime();
+        for (Picture picture : pictureList) {
+            String name = userDao.findUserById(picture.getUserId()).getName();
+            PictureVO pictureVO = new PictureVO(
+                    picture.getId(),
+                    picture.getUserId(),
+                    picture.getLikeNum(),
+                    picture.getTitle(),
+                    picture.getPictureData(),
+                    picture.getCreateDate(),
+                    name
+            );
+            pictureVOList.add(pictureVO);
+        }
+        return pictureVOList;
     }
 
     @RequestMapping("/giveLike")
@@ -41,7 +60,7 @@ public class PictureController {
 
         String userId=jsonObject.get("id").toString();
         List<Picture> pictureList;
-        pictureList = pictureDao.queryPersonalPicturesOrOrderByCreateTime(Long.parseLong(userId));
+        pictureList = pictureDao.queryPersonalPicturesOrderByCreateTime(Long.parseLong(userId));
         return  pictureList;
     }
 

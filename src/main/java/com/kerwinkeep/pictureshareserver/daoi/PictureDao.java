@@ -1,6 +1,7 @@
 package com.kerwinkeep.pictureshareserver.daoi;
 
 import com.kerwinkeep.pictureshareserver.model.Picture;
+import com.kerwinkeep.pictureshareserver.vo.PictureVO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -11,7 +12,7 @@ import java.util.List;
 public interface PictureDao extends JpaRepository<Picture, Integer> {
 
     @Query(value = "select * from picture_share.picture Order By create_time Desc",nativeQuery = true)
-    List<Picture> queryPicturesOrOrderByCreateTime();
+    List<Picture> queryPicturesOrderByCreateTime();
 
     @Modifying(clearAutomatically=true)
     @Transactional
@@ -19,7 +20,7 @@ public interface PictureDao extends JpaRepository<Picture, Integer> {
     int insertPicture(long id, String title, String pictureData);
 
     @Query(value = "select * from picture_share.picture where user_id=?1 Order By create_time Desc",nativeQuery = true)
-    List<Picture>  queryPersonalPicturesOrOrderByCreateTime(long userId);
+    List<Picture>  queryPersonalPicturesOrderByCreateTime(long userId);
 
     @Modifying(clearAutomatically=true)
     @Transactional

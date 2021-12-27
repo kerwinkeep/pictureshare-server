@@ -20,5 +20,4 @@ public interface UserDao extends JpaRepository<User, Integer> {
     @Query(value = "select * from picture_share.user where id=?1",nativeQuery = true)
     User findUserById(long id);
 
-
 }
