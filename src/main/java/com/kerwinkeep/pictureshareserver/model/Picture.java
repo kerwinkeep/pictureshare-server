@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import java.util.Date;
 
 @Entity(name = "picture")
-public class picture {
+public class Picture {
 
     @Id
     @Column(name = "id")
