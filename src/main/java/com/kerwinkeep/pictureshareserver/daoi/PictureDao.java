@@ -23,8 +23,8 @@ public interface PictureDao extends JpaRepository<Picture, Integer> {
 
     @Modifying(clearAutomatically=true)
     @Transactional
-    @Query(value = "update picture_share.picture set like_num=like_num+1 where  user_id=?1 ",nativeQuery = true)
-    int updateLikeNum(long userId);
+    @Query(value = "update picture_share.picture set like_num=like_num+1 where id=?1 ",nativeQuery = true)
+    int updateLikeNum(long id);
 
     @Modifying(clearAutomatically=true)
     @Transactional

@@ -20,7 +20,7 @@ public class UserController {
 
     @RequestMapping("/register")
     @ResponseBody
-    public String register(@RequestBody JSONObject jsonObject, HttpServletRequest request) {
+    public String register(@RequestBody JSONObject jsonObject) {
 
         String account = jsonObject.get("account").toString();
         String password = jsonObject.get("password").toString();
@@ -34,7 +34,7 @@ public class UserController {
 
     @RequestMapping("/login")
     @ResponseBody
-    public String login(@RequestBody JSONObject jsonObject, HttpServletRequest request) {
+    public String login(@RequestBody JSONObject jsonObject) {
 
         String account = jsonObject.get("account").toString();
         String password = jsonObject.get("password").toString();
@@ -44,5 +44,6 @@ public class UserController {
             return String.valueOf(user.getId());
         }
         return "账号或密码错误";
+
     }
 }
