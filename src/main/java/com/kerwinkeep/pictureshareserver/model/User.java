@@ -3,7 +3,6 @@ package com.kerwinkeep.pictureshareserver.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
 @Entity(name = "user")
 public class User {
@@ -17,7 +16,7 @@ public class User {
     @Column(name = "password", nullable = false, length = 20)
     String password;
 
-    @Column(name= "name", nullable = true, length = 20)
+    @Column(name= "name", length = 20)
     String name;
 
     public long getId() {

@@ -28,7 +28,7 @@ public interface PictureDao extends JpaRepository<Picture, Integer> {
 
     @Modifying(clearAutomatically=true)
     @Transactional
-    @Query(value = "delete from picture_share.picture where  user_id=?1 ",nativeQuery = true)
-    int deletePictureByUserId(long userId);
+    @Query(value = "delete from picture_share.picture where  id=?1 ",nativeQuery = true)
+    int deletePictureById(long id);
 
 }

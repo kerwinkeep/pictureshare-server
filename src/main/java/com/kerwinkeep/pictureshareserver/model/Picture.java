@@ -19,7 +19,7 @@ public class Picture {
     @Column(name = "title")
     String title;
 
-    @Column(name = "picture_data")
+    @Column(name = "picture_data", nullable = false)
     String pictureData;
 
     @Column(name = "create_time", nullable = false)
@@ -61,7 +61,7 @@ public class Picture {
         return pictureData;
     }
 
-    public void setPicture(String pictureData) {
+    public void setPictureData(String pictureData) {
         this.pictureData = pictureData;
     }
 

@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
-
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -43,7 +41,7 @@ public class UserController {
         if(user != null){
             return String.valueOf(user.getId());
         }
-        return "账号或密码错误";
+        return "The account or password is incorrect.";
 
     }
 }

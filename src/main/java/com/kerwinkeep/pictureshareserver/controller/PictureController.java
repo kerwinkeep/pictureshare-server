@@ -6,7 +6,6 @@ import com.kerwinkeep.pictureshareserver.model.Picture;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -30,7 +29,7 @@ public class PictureController {
     public String giveLike(@RequestBody JSONObject jsonObject){
 
         String id = jsonObject.get("id").toString();
-        if(pictureDao.updateLikeNum(Long.parseLong(id)) == 1){
+        if(1 == pictureDao.updateLikeNum(Long.parseLong(id))){
             return "Give a like successfully.";
         }
         return "Failed to give a like.";
@@ -55,8 +54,20 @@ public class PictureController {
         String pictureData = jsonObject.get("pictureData").toString();
 
         if(1 == pictureDao.insertPicture(id, title, pictureData)){
-            return "上传成功";
+            return "Upload complete.";
         }
-        return "上传失败";
+        return "Fail to upload.";
+    }
+
+    @RequestMapping("/deletePicture")
+    @ResponseBody
+    public String deletePicture(@RequestBody JSONObject jsonObject){
+
+        long id = Long.parseLong(jsonObject.get("id").toString());
+
+        if(1 == pictureDao.deletePictureById(id)){
+            return "Deleted successfully.";
+        }
+        return "Fail to delete.";
     }
 }
