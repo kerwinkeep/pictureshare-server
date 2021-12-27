@@ -15,8 +15,8 @@ public interface PictureDao extends JpaRepository<Picture, Integer> {
 
     @Modifying(clearAutomatically=true)
     @Transactional
-    @Query(value = "insert into picture_share.picture(user_id,title,picture) value (?1,?2,?3)",nativeQuery = true)
-    int insertPicture(long id, String title, String picture);
+    @Query(value = "insert into picture_share.picture(user_id,title,picture_data) value (?1,?2,?3)",nativeQuery = true)
+    int insertPicture(long id, String title, String pictureData);
 
     @Query(value = "select * from picture_share.picture where user_id=?1 Order By create_time Desc",nativeQuery = true)
     List<Picture>  queryPersonalPicturesOrOrderByCreateTime(long userId);

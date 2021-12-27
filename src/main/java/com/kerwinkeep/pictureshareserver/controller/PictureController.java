@@ -4,10 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.kerwinkeep.pictureshareserver.daoi.PictureDao;
 import com.kerwinkeep.pictureshareserver.model.Picture;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -47,5 +44,19 @@ public class PictureController {
         List<Picture> pictureList;
         pictureList = pictureDao.queryPersonalPicturesOrOrderByCreateTime(Long.parseLong(userId));
         return  pictureList;
+    }
+
+    @PostMapping("/uploadPicture")
+    @ResponseBody
+    public String uploadPic(@RequestBody JSONObject jsonObject){
+
+        long id = Long.parseLong(jsonObject.get("userId").toString());
+        String title = jsonObject.get("title").toString();
+        String pictureData = jsonObject.get("pictureData").toString();
+
+        if(1 == pictureDao.insertPicture(id, title, pictureData)){
+            return "上传成功";
+        }
+        return "上传失败";
     }
 }

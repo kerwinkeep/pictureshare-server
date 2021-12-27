@@ -1,8 +1,6 @@
 package com.kerwinkeep.pictureshareserver.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity(name = "picture")
@@ -21,8 +19,8 @@ public class Picture {
     @Column(name = "title")
     String title;
 
-    @Column(name = "picture")
-    String picture;
+    @Column(name = "picture_data")
+    String pictureData;
 
     @Column(name = "create_time", nullable = false)
     Date createDate;
@@ -59,12 +57,12 @@ public class Picture {
         this.title = title;
     }
 
-    public String getPicture() {
-        return picture;
+    public String getPictureData() {
+        return pictureData;
     }
 
-    public void setPicture(String picture) {
-        this.picture = picture;
+    public void setPicture(String pictureData) {
+        this.pictureData = pictureData;
     }
 
     public Date getCreateDate() {
